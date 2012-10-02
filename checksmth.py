@@ -1,6 +1,7 @@
 #-*- coding:utf8
 import feedparser
 import time
+import ramlab_mail
 
 
 CheckedLinks = []
@@ -17,7 +18,7 @@ def check(BoardName,KeyWords):
 #                print desc
 #                print i.link
                 if i.link not in CheckedLinks:
-                    result.append('\n'.join([desc,i.link]))
+                    result.append(u'\n'.join([desc,i.link]))
                     CheckedLinks.append(i.link)
     return result
 
@@ -31,12 +32,21 @@ def countdown(sec=10):
 
 def main():
     BoardName = 'HouseRent'
-    KeyWords = [u'清华']
+    KeyWords = [u'清华',u'南门',u'西北小区',u'西北社区',u'五道口',u'校内',u'照澜院']
+    m = ramlab_mail.ramlab_mail()
+
     while True:
-        if check(BoardName,KeyWords):
+        monitor_string = u'SMTH监控: %s KeyWords:%s'%(BoardName,','.join(KeyWords))
+
+        print monitor_string
+        result = check(BoardName,KeyWords)
+        if result:
             print u'找到了~'
+            msg = u'\n'.join(result)
+            print msg
+            m.sendmail(to='scateu@gmail.com',subject=monitor_string,message=msg)
         else:
-            print u'啥都没...'
+            print u'没啥新的...'
         countdown(10)
 
 if __name__ == "__main__":

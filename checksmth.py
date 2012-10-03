@@ -35,7 +35,7 @@ def countdown(sec=10):
 def main():
     parser = OptionParser()
     parser.add_option("-b","--board",dest="BoardName",help="The BoardName to be watched")
-    parser.add_option("-k","--keywords",dest="KeyWords",type="string",help="Words to be watched")
+    parser.add_option("-k","--keywords",dest="KeyWords",type="string",help="Words to be watched (no space, comma splited)")
     parser.add_option("-m","--mail-to",dest="MailTo",help="Notify e-mail address when found")
     parser.add_option("-i","--interval",dest="Interval",type="int",help="Check interval, default = 10 sec")
 

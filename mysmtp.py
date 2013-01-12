@@ -3,23 +3,18 @@ import smtplib
 from email.mime.text import MIMEText
 from email.Header import Header
 
-class ramlab_mail():
+class mymail():
     """
     Library to sendmail from ramlab_things@126.com
     see sendmail()
     """
     def __init__(self):
-        self.email_user = "ramlab_things@126.com"
-        self.email_password = "Hallelujah2193@~"
+        self.email_user = None
+        self.email_password = None
+        self.email_server = "smtp.126.com"
+        self.email_smtp_port = 25
     def sendmail(self,to,subject,message):
-        """
-        to = 'scateu@gmail.com'
-        subject = 'blahblah'
-        message = 'blahblah'
-        m = ramlab_mail()
-        m.sendmail(to='scateu@gmail.com',subject='blah',message='bye.')
-        """
-        self.smtpserver = smtplib.SMTP("smtp.126.com",25)
+        self.smtpserver = smtplib.SMTP(self.email_server,self.email_smtp_port)
         self.smtpserver.ehlo()
         self.smtpserver.starttls()
         self.smtpserver.ehlo
@@ -33,5 +28,9 @@ class ramlab_mail():
         self.smtpserver.close()
 
 if __name__ == "__main__":
-    m = ramlab_mail()
+    m = mymail()
+    m.email_user = "blahblah@126.com"
+    m.email_password = "somepassword"
+    m.email_server = "smtp.126.com"
+    m.email_smtp_port = 25
     m.sendmail(to='scateu@gmail.com',subject=u'中文邮件',message=u'哈哈')

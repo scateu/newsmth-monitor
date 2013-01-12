@@ -1,6 +1,6 @@
 Intro
 =====
-A rss monitor for newsmth. 
+A keyword-based new thread  monitor for specific board of newsmth.
 
 Usage
 =====
